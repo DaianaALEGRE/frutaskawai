@@ -11,10 +11,12 @@ const mongoose = require('mongoose');
 const path=require('path');
 const dotenv = require('dotenv');
 dotenv.config();
+const bodyParser = require('body-parser'); 
 
 //const MONGO_URI = process.env.MONGO_URI;
-
-
+// Middleware
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const filepath = path.join(__dirname, 'database', process.env.DATA_FILE);
 const frutas =JSON.parse(fs.readFileSync(filepath,'utf-8'));
@@ -23,13 +25,20 @@ const frutas =JSON.parse(fs.readFileSync(filepath,'utf-8'));
 const productos= require('./rutas/productos.r');
 const nombre= require('./rutas/nombre.r');
 const id= require('./rutas/id');
-
+const crud= require('./rutas/frutas.r');
 
 //direcciones
 app.use('/',id);
 app.use('/',productos);
 //app.use('/productos/:id',r_precio);
 app.use('/',nombre);
+app.use('/',crud);
 app.listen(PORT,()=>{//express con app
         console.log(`puerto en el servidorservidor ejecutandose en el puerto ${PORT}`)
 });
+
+
+// aclaracion ,cambie el nombre de los endpoints para controlar mejor las peticiones y evitar errores:
+//GET /productos → Todos los productos
+//GET /productos/id/:id → Producto por ID
+//GET /productos/nombre/:nombre → Producto por nombre
