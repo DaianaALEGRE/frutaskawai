@@ -24,6 +24,36 @@ function agregarFruta(req, res) {
     guardarFrutas(frutas);
       res.status(201).json(nuevaFruta);
 }
+function actualizarFruta(req, res){
+  const frutas= leerFrutas();
+const id = parseInt(req.params.id);
+const index= frutas.findIndex(fruta =>fruta.id === id);
 
+if(index=== -1){ 
+  return res.status(404).json({error: 'fruta no encontrada'});
+}
+frutas[index] = {...frutas[index], ...req.body};
+guardarFrutas(frutas);
+res.status(200).json({
+  mensaje: ' Actualizada correctamente' ,
+  fruta: frutas[index]});
+ }
+ 
+ function eliminar(req,res){
+ const frutas= leerFrutas();
+const id = parseInt(req.params.id);
+const index= frutas.findIndex(fruta =>fruta.id === id);
+
+if(index=== -1){ 
+  return res.status(404).json({error: 'fruta no encontrada'});
+}
+const frutaEliminada = frutas.splice(index,1)[0];
+  guardarFrutas(frutas);
+res.status(200).json({
+  mensaje: 'Borrada correctamente' ,
+  fruta: frutaEliminada});
+ 
+
+ }
 module.exports = {
-  verFrutas ,agregarFruta}
+  verFrutas ,agregarFruta, actualizarFruta,eliminar}

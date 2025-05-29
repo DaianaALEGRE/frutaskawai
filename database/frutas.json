@@ -1,12 +1,5 @@
 [
   {
-    "id": 1,
-    "imagen": "🍌",
-    "nombre": "Bananas",
-    "importe": 220,
-    "stock": 50
-  },
-  {
     "id": 2,
     "imagen": "🍎",
     "nombre": "Manzanas",
@@ -46,13 +39,6 @@
     "imagen": "🥥",
     "nombre": "Cocos",
     "importe": 270,
-    "stock": 50
-  },
-  {
-    "id": 8,
-    "imagen": "🍉",
-    "nombre": "Sandias",
-    "importe": 200,
     "stock": 50
   },
   {
